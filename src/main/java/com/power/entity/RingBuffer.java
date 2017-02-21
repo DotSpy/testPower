@@ -31,32 +31,13 @@ public class RingBuffer {
     }
 
     public void put(Long element) {
-
-//        if (available < capacity) {
         if (writePos >= capacity) {
             writePos = 0;
         }
         elements[writePos] = element;
         writePos++;
         available++;
-//        return true;
-//        }
-
-//        return false;
     }
-
-//    public Long takeAndDelete() {
-//        if (available == 0) {
-//            return null;
-//        }
-//        int nextSlot = writePos - available;
-//        if (nextSlot < 0) {
-//            nextSlot += capacity;
-//        }
-//        Long nextObj = elements[nextSlot];
-//        available--;
-//        return nextObj;
-//    }
 
     public Long takeTail() {
         if (available == 0) {
