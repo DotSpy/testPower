@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         WatchingService watchingService = WatchingServiceImpl.INSTANCE;
-        File dir = new File("D:\\test");
+        File dir = new File(args[0]);
         watchingService.watchDirectory(dir.toPath());
     }
 }
