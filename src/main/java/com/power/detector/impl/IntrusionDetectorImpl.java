@@ -7,16 +7,10 @@ import com.power.entity.RecentLoginEntryContainer;
 
 public class IntrusionDetectorImpl implements IntrusionDetector {
 
-    public final static IntrusionDetectorImpl INSTANCE = new IntrusionDetectorImpl();
-
-    private IntrusionDetectorImpl() {
-    }
-
     private RecentLoginEntryContainer recentLoginEntryContainer = RecentLoginEntryContainer.INSTANCE;
 
-    private IntrusionDetectorManual intrusionDetectorManual = IntrusionDetectorManualImpl.INSTANCE;
-
     public String detectIntrusion(LogEnry logEnry) {
+        IntrusionDetectorManual intrusionDetectorManual = new IntrusionDetectorManualImpl();
         intrusionDetectorManual.clean(logEnry.getEpochTime());
         if (recentLoginEntryContainer.addLogin(logEnry)) {
             return logEnry.getLogin(); //intrusion

@@ -9,11 +9,6 @@ public class IntrusionDetectorManualImpl implements IntrusionDetectorManual {
 
     private static final Long INVALIDATE_TIME = 300000L;
 
-    public final static IntrusionDetectorManualImpl INSTANCE = new IntrusionDetectorManualImpl();
-
-    private IntrusionDetectorManualImpl() {
-    }
-
     private RecentLoginEntryContainer recentLoginEntryContainer = RecentLoginEntryContainer.INSTANCE;
 
     private IntrusionTimer intrusionTimer = IntrusionTimer.INSTANCE;

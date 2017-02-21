@@ -14,8 +14,6 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 
 public class WatchingServiceImpl implements WatchingService {
 
-    private LogAnalyzer logAnalyzer = LogAnalyzerImpl.INSTANCE;
-
     public final static WatchingServiceImpl INSTANCE = new WatchingServiceImpl();
 
     private WatchingServiceImpl() {
@@ -23,6 +21,7 @@ public class WatchingServiceImpl implements WatchingService {
 
     @Override
     public void watchDirectory(Path path) {
+        LogAnalyzer logAnalyzer = new LogAnalyzerImpl();
         try {
             Boolean isFolder = (Boolean) Files.getAttribute(path,
                     "basic:isDirectory", NOFOLLOW_LINKS);

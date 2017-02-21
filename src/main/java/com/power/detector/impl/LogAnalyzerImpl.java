@@ -10,14 +10,8 @@ import java.util.List;
 
 public class LogAnalyzerImpl implements LogAnalyzer {
 
-    private IntrusionDetector intrusionDetector = IntrusionDetectorImpl.INSTANCE;
-
-    public final static LogAnalyzerImpl INSTANCE = new LogAnalyzerImpl();
-
-    private LogAnalyzerImpl() {
-    }
-
     public String parseLine(String line) {
+        IntrusionDetector intrusionDetector = new IntrusionDetectorImpl();
         List<String> loginList = Arrays.asList(line.split(","));
         LogEnry logEnry = LogEnry.newBuilder()
                 .withIp(loginList.get(0))
