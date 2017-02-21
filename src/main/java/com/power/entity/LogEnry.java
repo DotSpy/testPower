@@ -2,6 +2,7 @@ package com.power.entity;
 
 public class LogEnry {
 
+    // поля могут быть final
     private String ip;
     private String login;
     private LoginStatus status;

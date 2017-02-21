@@ -10,8 +10,11 @@ public class RecentLoginEntryContainer {
     private RecentLoginEntryContainer() {
     }
 
+    // лишняя параметризация справа
     private Map<String, RingBuffer> recentLoginMap = new HashMap<String, RingBuffer>();
 
+    // пересмотри этот метод, он за исключением создания буффера идентичен
+    //
     public Boolean addLogin(LogEnry logEnry) {
         if (recentLoginMap.containsKey(logEnry.getIp())) {
             recentLoginMap.get(logEnry.getIp()).put(logEnry.getEpochTime());
@@ -19,6 +22,9 @@ public class RecentLoginEntryContainer {
                 return true;
             }
         } else {
+            // если мы для айпи создаем новый буффер, то он скорее всего не будет содержать 5
+            // элементов, + можно заюзать computeIfAbsent метод
+            // опять же, у тебя 5-ка магическое число, непорядок
             RingBuffer ringBuffer = new RingBuffer(5);
             ringBuffer.put(logEnry.getEpochTime());
             recentLoginMap.put(logEnry.getIp(), ringBuffer);
