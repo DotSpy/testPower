@@ -14,6 +14,10 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 
 public class WatchingServiceImpl implements WatchingService {
 
+    /* ты если делаешь уже синглетон или инстанс холдер,
+     * то делай до конца =)
+     *
+     */
     public final static WatchingServiceImpl INSTANCE = new WatchingServiceImpl();
 
     private WatchingServiceImpl() {
@@ -42,6 +46,7 @@ public class WatchingServiceImpl implements WatchingService {
                 for (WatchEvent<?> watchEvent : key.pollEvents()) {
                     kind = watchEvent.kind();
                     if (ENTRY_MODIFY == kind) {
+                        // тут ворнинг идея высвечивает, ничего нельзя сделать?
                         Path modifiedPath = ((WatchEvent<Path>) watchEvent).context();
                         logAnalyzer.parseLine(tail(Paths.get(path.toString(), modifiedPath.toString()).toFile()));
                     }
@@ -57,6 +62,7 @@ public class WatchingServiceImpl implements WatchingService {
 
     private String tail(File file) {
         RandomAccessFile fileHandler = null;
+        // можно сделать через try-with-resources
         try {
             fileHandler = new RandomAccessFile(file, "r");
             long fileLength = fileHandler.length() - 1;

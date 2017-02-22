@@ -15,7 +15,10 @@ public class IntrusionDetectorManualImpl implements IntrusionDetectorManual {
 
     public void clean(Long currentTime) {
         intrusionTimer.setEpochTime(currentTime);
+        // можно заменить на forEach()
         for (RingBuffer ringBuffer : recentLoginEntryContainer.getRecentLoginMap().values()) {
+            // intrusionTimer.getEpochTime() - ringBuffer.takeTail() > INVALIDATE_TIME
+            // вынеси в метод отдельный
             if (ringBuffer.takeTail() != null && intrusionTimer.getEpochTime() - ringBuffer.takeTail() > INVALIDATE_TIME) {
                 ringBuffer.deleteTail();
             }
