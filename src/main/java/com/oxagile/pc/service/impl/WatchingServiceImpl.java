@@ -1,8 +1,8 @@
-package com.power.service.impl;
+package com.oxagile.pc.service.impl;
 
-import com.power.detector.LogAnalyzer;
-import com.power.detector.impl.LogAnalyzerImpl;
-import com.power.service.WatchingService;
+import com.oxagile.pc.detector.impl.LogAnalyzerImpl;
+import com.oxagile.pc.service.WatchingService;
+import com.oxagile.pc.detector.LogAnalyzer;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,13 +14,16 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 
 public class WatchingServiceImpl implements WatchingService {
 
-    /* ты если делаешь уже синглетон или инстанс холдер,
-     * то делай до конца =)
-     *
-     */
-    public final static WatchingServiceImpl INSTANCE = new WatchingServiceImpl();
+    private static WatchingServiceImpl instance = null;
 
     private WatchingServiceImpl() {
+    }
+
+    public static WatchingServiceImpl getInstance() {
+        if (instance == null) {
+            instance = new WatchingServiceImpl();
+        }
+        return instance;
     }
 
     @Override
@@ -46,7 +49,6 @@ public class WatchingServiceImpl implements WatchingService {
                 for (WatchEvent<?> watchEvent : key.pollEvents()) {
                     kind = watchEvent.kind();
                     if (ENTRY_MODIFY == kind) {
-                        // тут ворнинг идея высвечивает, ничего нельзя сделать?
                         Path modifiedPath = ((WatchEvent<Path>) watchEvent).context();
                         logAnalyzer.parseLine(tail(Paths.get(path.toString(), modifiedPath.toString()).toFile()));
                     }
@@ -62,7 +64,6 @@ public class WatchingServiceImpl implements WatchingService {
 
     private String tail(File file) {
         RandomAccessFile fileHandler = null;
-        // можно сделать через try-with-resources
         try {
             fileHandler = new RandomAccessFile(file, "r");
             long fileLength = fileHandler.length() - 1;

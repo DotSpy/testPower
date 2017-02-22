@@ -1,13 +1,13 @@
-package com.power.detector.impl;
+package com.oxagile.pc.detector.impl;
 
-import com.power.detector.IntrusionDetector;
-import com.power.detector.IntrusionDetectorManual;
-import com.power.entity.LogEnry;
-import com.power.entity.RecentLoginEntryContainer;
+import com.oxagile.pc.detector.IntrusionDetector;
+import com.oxagile.pc.detector.IntrusionDetectorManual;
+import com.oxagile.pc.entity.LogEnry;
+import com.oxagile.pc.entity.RecentLoginEntryContainer;
 
 public class IntrusionDetectorImpl implements IntrusionDetector {
 
-    private RecentLoginEntryContainer recentLoginEntryContainer = RecentLoginEntryContainer.INSTANCE;
+    private RecentLoginEntryContainer recentLoginEntryContainer = RecentLoginEntryContainer.getInstance();
 
     public String detectIntrusion(LogEnry logEnry) {
         IntrusionDetectorManual intrusionDetectorManual = new IntrusionDetectorManualImpl();

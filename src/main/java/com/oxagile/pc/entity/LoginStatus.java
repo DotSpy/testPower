@@ -1,4 +1,4 @@
-package com.power.entity;
+package com.oxagile.pc.entity;
 
 public enum LoginStatus {
     FAILURE,

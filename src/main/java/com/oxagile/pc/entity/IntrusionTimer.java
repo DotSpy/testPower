@@ -1,11 +1,19 @@
-package com.power.entity;
+package com.oxagile.pc.entity;
 
 public class IntrusionTimer {
-    
-    public final static IntrusionTimer INSTANCE = new IntrusionTimer();
+
+    private static IntrusionTimer instance = null;
 
     private IntrusionTimer() {
     }
+
+    public static IntrusionTimer getInstance() {
+        if (instance == null) {
+            instance = new IntrusionTimer();
+        }
+        return instance;
+    }
+
     private Long epochTime;
 
     public Long getEpochTime() {

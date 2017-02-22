@@ -1,6 +1,6 @@
-package com.power.detector;
+package com.oxagile.pc.detector;
 
-import com.power.detector.impl.LogAnalyzerImpl;
+import com.oxagile.pc.detector.impl.LogAnalyzerImpl;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

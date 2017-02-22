@@ -1,12 +1,11 @@
-package com.power.entity;
+package com.oxagile.pc.entity;
 
 public class LogEnry {
 
-    // поля могут быть final
-    private String ip;
-    private String login;
-    private LoginStatus status;
-    private Long epochTime;
+    private final String ip;
+    private final String login;
+    private final LoginStatus status;
+    private final Long epochTime;
 
     private LogEnry(Builder builder) {
         ip = builder.ip;
